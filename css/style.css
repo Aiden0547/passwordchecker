@@ -1,40 +1,198 @@
+/* 기본 폰트 및 배경 설정 */
 body {
-  font-family: sans-serif;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    background-color: #f4f7f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 20px;
+    margin: 0;
 }
-#analysisDetails, #explanation {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.4);
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 30px;
 }
-#analysisContent, #explanationContent {
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
+
+/* 입력 영역 스타일 */
+div {
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 400px;
 }
-.closeBtn {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
 }
-.closeBtn:hover,
-.closeBtn:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box; /* 패딩 포함 크기 조절 */
+    transition: border-color 0.3s;
 }
-#explanationBtn {
-  margin-top: 10px;
+
+input[type="password"]:focus {
+    border-color: #3498db;
+    outline: none;
 }
+
+/* 결과 표시 영역 */
 #result {
-  margin-top: 10px;
-  font-weight: bold;
+    margin-top: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    min-height: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* 버튼 스타일 */
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+#explanationBtn {
+    background-color: #2ecc71;
+}
+
+#explanationBtn:hover {
+    background-color: #27ae60;
+}
+
+/* 모달(분석 과정 및 설명) 배경 */
+#analysisDetails, #explanation {
+    display: none; /* 기본적으로 숨김 */
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    overflow: auto;
+}
+
+/* 모달 콘텐츠 박스 */
+#analysisContent, #explanationContent {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    line-height: 1.6;
+}
+
+/* 닫기 버튼 */
+.closeBtn {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.closeBtn:hover {
+    color: #000;
+}
+
+/* 분석 과정 코드 스타일 */
+#analysisSteps {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-left: 4px solid #3498db;
+    overflow-x: auto;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+}
+
+/* 반응형 모바일 설정 */
+@media (max-width: 600px) {
+    #analysisContent, #explanationContent {
+        width: 90%;
+        margin: 20% auto;
+    }
+}
+
+/* 모달 전체 배경 */
+.modal {
+    display: none; /* 기본적으로 숨김 */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* 배경 어둡게 */
+    backdrop-filter: blur(4px); /* 배경 흐리게 */
+}
+
+/* 모달 콘텐츠 박스 */
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 15px;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    /* 나타날 때 애니메이션 */
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* 닫기 버튼 */
+.closeBtn {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 25px;
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.closeBtn:hover {
+    color: #e74c3c;
+}
+
+/* 수식 및 코드 강조 */
+#analysisSteps {
+    background: #2d3436;
+    color: #dfe6e9;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: 'Consolas', monospace;
+    overflow-x: auto;
 }
